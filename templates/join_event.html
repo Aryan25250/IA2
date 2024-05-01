@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<title>Join Event</title>
+
+<body class="w3-container">
+    <h1>Join Event</h1>
+    <form method="post" class="w3-container w3-card-4 w3-padding">
+        <label>Event Code</label>
+        <input type="text" name="code" class="w3-input w3-border" required>
+
+        <br>
+        <button type="submit" class="w3-button w3-green">Submit</button>
+    </form>
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="w3-panel w3-{{ category }} w3-display-container">
+            <span onclick="this.parentElement.style.display='none'"
+                  class="w3-button w3-{{ category }} w3-large w3-display-topright">&times;</span>
+            {{ message }}
+        </div>
+    {% endfor %}
+</body>
+</html>
+
+{% endblock %}

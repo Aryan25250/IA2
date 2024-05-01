@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if query %}
+<title>Search - {{query}}</title>
+{% else %}
+<title>Search</title>
+{% endif %}
+<body class="w3-container">
+   <form method="post">
+        <label>Search games</label>
+        <input type="text" name="search" class="w3-input w3-border"
+            {% if query %}:
+               value="{{ query }}"
+            {% endif %}
+
+               required>
+        <button type="search-button" class="w3-button w3-green">Search</button>
+    </form>
+
+    <br>
+    <br>
+
+   {% if results %}
+        <h2>Results</h2>
+        <hr>
+
+        <div class="grid-container" style="display:grid;grid-template-columns: auto auto auto;">
+            {% for name,data in games.items() %}
+               <a href="{{ url_for('game', id=data.id) }}"><div class="grid-item" style="position:relative">
+                   {% set id = data.trailer_link.split('=')[1] %}
+
+                   <b><p style="position:absolute;color:white;bottom: 0px; left: 16px;">{{name}}</p></b>
+
+                   <img src="http://img.youtube.com/vi/{{id}}/0.jpg">
+               </div></a>
+            {% endfor %}
+        </div>
+   {% endif %}
+</body>
+</html>
+
+{% endblock %}

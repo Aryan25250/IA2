@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <meta charset="UTF-8">
+</head>
+<body>
+    <br>
+    <div>
+        <a href="{{ url_for('home') }}">Home</a>
+         <a href="{{ url_for('games') }}">Games</a>
+
+         {% if session['user'] %}
+            <a href="{{ url_for('user', user_id=session['user']['id']) }}">Profile</a>
+
+        {% if 'user_events' in session %}
+             <form method="post" action="{{ url_for('home') }}" style="display: inline">
+                 <input type="hidden" name="event_dropdown">
+                 <input type="hidden" name="source" value="{{ url_for(request.endpoint, **request.view_args) }}">
+                 <select name="events" id="events" onchange="this.form.submit()">
+                    {% for event in session['user_events'] %}
+                        {% if event[0] == session['selected_event'] %}:
+                            <option selected="selected" name="{{ event[0] }}" value="{{ event[0] }}">{{ event[1] }} </option>
+                        {% else %}
+                            <option name="{{ event[0] }}" value="{{ event[0] }}">{{ event[1] }} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </form>
+        {% endif %}
+        {% endif %}
+    </div>
+
+
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

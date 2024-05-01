@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<title>game</title>
+<body class="w3-container">
+
+{% set id = data.trailer_link.split('=')[1] %}
+
+<img src="http://img.youtube.com/vi/{{id}}/0.jpg" style="display:block;margin-left:auto;margin-right:auto;width:40%;height:40%;">
+<h1 style="text-align:center;font-weight:700;">{{data.title}}</h1>
+
+<h3 style="text-align:center">
+     {{data.publisher}}
+</h3>
+
+<p style="text-align:center">
+    {{data.platform}} • {{data.release_date}} • {{data.genre}}
+</p>
+
+
+</body>
+</html>
+
+{% endblock %}

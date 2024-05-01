@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<title>Event - {{event[2]}}</title>
+
+<body class="w3-container">
+
+<br>
+<img src="{{event[8]}}" style="width:250px;">
+
+<h1>
+    {{event[4]}}
+</h1>
+
+<h3>Description</h3>
+{{event[7]}}
+
+<h3>Invite Code</h3>
+{{event[6]}}
+
+<h3>Time</h3>
+{{time}}
+
+<h3>Owner</h3>
+{{event[2]}}
+
+<h3>Users</h3>
+{% for user in users %}
+    <a href="{{ url_for('user', user_id=user[0]) }}">{{ user[1] }}</a>
+    <br>
+{% endfor %}
+
+<h3>Songs</h3>
+{% for song in songs %}
+    {% if song[3] > 0 %}
+        <img src="{{song[2]}}" alt="Placeholder image" style="width:50px">
+        <a href="{{ url_for('song', id=song[0]) }}">{{ song[1] }}</a>
+        | {{song[3]}}
+        <hr>
+    {% endif %}
+{% endfor %}
+
+<br>
+
+ <form method="post">
+       <input type="hidden" name="leave">
+        <button type="submit" class="w3-button w3-red">Leave Event</button>
+    </form>
+
+<br>
+<br>
+
+</body>
+
+{% endblock %}
